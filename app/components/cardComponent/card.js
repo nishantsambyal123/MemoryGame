@@ -17,14 +17,16 @@ const CardComponent = props => {
 
   return (
     <View style={styles.mainComponent}>
-      <TouchableOpacity onPress={() => onImageClick(item)} disabled={reveal}>
-        {item.matched && (
+      <TouchableOpacity
+        onPress={() => onImageClick(item)}
+        disabled={item.reveal}>
+        {!item.matched && (
           <View style={styles.imageContainer}>
             <Image
               style={styles.tinyLogo}
-              source={reveal ? item.image : pattern}
+              source={item.reveal === true ? item.image : pattern}
             />
-            <Text>{item.name}</Text>
+            {/* <Text>{item.name}</Text> */}
           </View>
         )}
       </TouchableOpacity>
