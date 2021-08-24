@@ -6,16 +6,31 @@ import {getShuffledArr} from '../../util';
 
 const GameScreen = params => {
   const [data, setData] = useState();
+  const [count, setCount] = useState(1);
 
   useEffect(() => {
     setData(getShuffledArr(rawData));
   }, []);
 
   const selected = item => {
-    item.setSelected = true;
-    const index = data.findIndex(obj => obj.selected === item.id);
+    const index = data.findIndex(obj => obj.selected);
     if (index !== -1) {
-      console.log('ek hi ahin');
+      if (data[index].id === item.id) {
+        data[index].matched = true;
+        item.matched = true;
+        console.log('Matched');
+      } else {
+        console.log('Not Matched');
+        setTimeout(() => {
+
+        }, 2000);
+      }
+      data.map(resetItem => (resetItem.selected = false));
+      setCount(count + 1);
+      console.log('count ', count);
+    } else {
+      item.selected = true;
+      item.reveal = true;
     }
   };
 
